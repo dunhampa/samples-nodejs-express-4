@@ -72,6 +72,14 @@ module.exports = function SampleWebServer(sampleConfig, extraOidcOptions, homePa
     });
   });
 
+  app.get('/pj5', oidc.ensureAuthenticated(), (req, res) => {
+    const userinfo = req.userContext && req.userContext.userinfo;
+    res.render('pj5', {
+      isLoggedIn: !!userinfo,
+      userinfo: userinfo
+    });
+  });
+
   app.get('/profile', oidc.ensureAuthenticated(), (req, res) => {
     // Convert the userinfo object into an attribute array, for rendering with mustache
     const userinfo = req.userContext && req.userContext.userinfo;

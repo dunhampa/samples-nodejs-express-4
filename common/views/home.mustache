@@ -2,45 +2,47 @@
 <html lang="en">
   <head>
     {{>head}}
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Ensure proper rendering and touch zooming for all devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body id="samples">
 
     {{>menu}}
 
-    <div id="content" class="ui container padded grid relaxed">
-      <div id="doc" class="column eight wide">
-        <div class="doc-overview text container">
+    <div id="content" class="container py-3">
+      <div id="doc" class="col-lg-8 mx-auto">
 
-          <h2 class="ui dividing header" data-se="overview-doc-header">
-            Okta Hosted Login + Express JS Example
-          </h2>
+          <div class="doc-overview text container">
+            <h2 class="border-bottom pb-3" data-se="overview-doc-header">
+              Okta Hosted Login + Express JS Example
+            </h2>
 
-          {{^isLoggedIn}}
-            <p>Hello!</p>
-            <p>If you're viewing this page then you have successfully configured this example server.  Your server configuration is listed on the right.</p>
-            <p>This example shows you how to use the <a href="https://github.com/okta/okta-oidc-js/tree/master/packages/oidc-middleware">Okta OIDC Middleware Library</a> to add the <a href="https://developer.okta.com/authentication-guide/implementing-authentication/auth-code">Authorization Code Flow</a> to your application.</p>
-            <p>When you click the login button below, you will be redirected to the login page on your Okta org.  After you authenticate, you will be returned to this application where a local cookie session will be created for you.</p>
-          {{/isLoggedIn}}
+            {{^isLoggedIn}}
+              <!-- logged out content -->
+            {{/isLoggedIn}}
 
-          {{#isLoggedIn}}
-            <p>Welcome back, {{userinfo.name}}!</p>
-            <p>You have successfully authenticated against your Okta org, and have been redirected back to this application.  Here are some cool things to know:</p>
-            <ul>
-              <li>The <a href="https://github.com/okta/okta-oidc-js/tree/master/packages/oidc-middleware">Okta OIDC Middleware Library</a> has created a local cookie session to persist your authentication.</li>
-              <li>The session contains the information retrieved from the <a href="https://developer.okta.com/docs/api/resources/oidc#get-user-information">User Info Endpoint</a> of the cofigured issuer. This information is automatically persisted for you, and can be read from <code>req.userContext.userinfo</code></li>
-              <li>Visit the <a href="/profile">My Profile</a> page in this application to see an example of using this data.</li>
-            </ul>
-            <p></p>
-          {{/isLoggedIn}}
+            {{#isLoggedIn}}
+              <!-- logged in content -->
+            {{/isLoggedIn}}
 
-          {{^isLoggedIn}}
-            <form method="get" action="/login">
-              <button id="login-button" class="ui primary button" type="submit">Log In</button>
-            </form>
-          {{/isLoggedIn}}
+            {{^isLoggedIn}}
+              <form method="get" action="/login" class="mt-3">
+                <button id="login-button" class="btn btn-primary" type="submit">Log In</button>
+              </form>
+            {{/isLoggedIn}}
+
+          </div>
+
         </div>
-      </div>
+
       {{>server-config}}
+
     </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   </body>
 </html>

@@ -14,6 +14,7 @@
 
 html, body {
   height: 100%;
+  margin: 0px;
 }
 
 a:link, a:visited, a:active {
@@ -218,3 +219,7 @@ ol.ui.list li {
   background-color: #fff;
   color: #777;
 }
+canvas {
+  display:block;
+}
+
