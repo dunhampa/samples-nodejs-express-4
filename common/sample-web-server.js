@@ -38,10 +38,17 @@ module.exports = function SampleWebServer(sampleConfig, extraOidcOptions, homePa
 
   const app = express();
 
+  app.set('trust proxy', 1);
+	
   app.use(session({
     secret: 'this-should-be-very-random',
     resave: true,
-    saveUninitialized: false
+    saveUninitialized: false,
+    
+    cookie: {
+    	sameSite: 'None',
+    	secure: true // Required when SameSite=None, must be HTTPS
+    }	  
   }));
 
   // Provide the configuration to the view layer because we show it on the homepage
